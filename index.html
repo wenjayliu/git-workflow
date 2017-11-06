@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>ECharts</title>
+    <!-- 引入 echarts.js -->
+    <script src="https://cdn.bootcss.com/echarts/3.7.2/echarts-en.min.js"></script>
+</head>
+<body>
+    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+    <div id="main" style="width: 600px;height:400px;"></div>
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+
+        // 指定图表的配置项和数据
+        var option = {
+        title: {
+            text: 'git工作流'
+        },
+        tooltip: {},
+        animationDurationUpdate: 1500,
+        animationEasingUpdate: 'quinticInOut',
+          legend : { //=========圖表控件
+              show : true,
+              data : [ {
+                  name : 'master',
+                  icon : 'circle'//'circle', 'rect', 'roundRect', 'triangle', 'diamond', 'pin', 'arrow'
+              }]
+          },        
+        series : [
+            {
+                type: 'graph',
+                layout: 'none',
+                symbolSize: 50,
+                roam: true,
+                label: {
+                    normal: {
+                        show: true
+                    }
+                },
+                edgeSymbol: ['circle', 'arrow'],
+                edgeSymbolSize: [4, 10],
+                edgeLabel: {
+                    normal: {
+                        textStyle: {
+                            fontSize: 20
+                        }
+                    }
+                },
+                links: [{
+                    source: 0,
+                    target: 1,
+                  }, {
+                      source: '初始化项目'
+                  }],
+                data: [{
+                    name: '初始化',
+                    symbol : 'circle',
+                    category: 0,
+                    x: 50,
+                    y: 300
+                }],
+                    categories : [ //symbol name：用于和 legend 对应以及格式化 tooltip 的内容。 label有效
+                    {
+                        name : 'master',
+                        symbol : 'circle'
+                    }],               
+                lineStyle: {
+                    normal: {
+                        opacity: 0.9,
+                        width: 2,
+                        curveness: 0
+                    }
+                }
+            }
+        ]
+    };
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    </script>
+</body>
+</html>
